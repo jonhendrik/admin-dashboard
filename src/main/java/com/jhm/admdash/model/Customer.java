@@ -16,7 +16,7 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
-    @OneToMany(mappedBy="id")
+    @OneToMany(mappedBy="customer", orphanRemoval = true)
     private List<Invoice> invoiceList;
     
     @ManyToOne

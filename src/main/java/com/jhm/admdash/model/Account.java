@@ -17,7 +17,7 @@ public class Account {
     private Long id;
     private String name;
     private String description;
-    @OneToMany(mappedBy="id")
+    @OneToMany(mappedBy="account", orphanRemoval = true)
     private List<Customer> customerList;
     private String ownedBy;
     
