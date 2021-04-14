@@ -21,16 +21,13 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public boolean addCustomer(Customer customer) {
-		boolean updated = false;
+		boolean saved = false;
 		Customer customerEntity = customerRepository.findById(customer.getId()).orElse(null);
-		if (customerEntity != null) {
-			customerEntity.setAccount(customer.getAccount());
-			customerEntity.setName(customer.getName());
-			
-			customerRepository.save(customerEntity);
-			updated = true;
+		if (customerEntity == null) {
+			customerRepository.save(customer);
+			saved = true;
 		}
-		return updated;
+		return saved;
 	}
 
 	@Override
@@ -49,7 +46,13 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public boolean deleteCustomer(Long id) {
-		return false;
+		boolean deleted = false;
+		Customer customer = customerRepository.findById(id).orElse(null);
+		if (customer != null) {
+			customerRepository.delete(customer);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }
