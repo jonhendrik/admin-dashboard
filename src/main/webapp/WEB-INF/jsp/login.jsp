@@ -26,8 +26,8 @@
         <div class="row" style="margin-top: 40vh">
         	<div class="col-md-4"></div>
         	<div class="col-md-4">
-	        	<!--  <form action="dashboard" method="post"> -->
-	        	<form id="loginForm" method="post">
+	        	<form action="dashboard" method="post">
+	        	<!--  <form id="loginForm" method="post">  -->
 	        		<div class="row form-group">
 	        			<div class="col-md-12">
 	        				<input type="text" class="form-control" id="username" name="username" placeholder="Username">
