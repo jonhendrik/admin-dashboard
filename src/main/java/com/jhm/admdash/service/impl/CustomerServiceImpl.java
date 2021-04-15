@@ -1,9 +1,17 @@
 package com.jhm.admdash.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.jhm.admdash.model.Account;
 import com.jhm.admdash.model.Customer;
+import com.jhm.admdash.model.Invoice;
+import com.jhm.admdash.model.dto.CustomerDto;
+import com.jhm.admdash.model.dto.InvoiceDto;
+import com.jhm.admdash.repository.AccountRepository;
 import com.jhm.admdash.repository.CustomerRepository;
 import com.jhm.admdash.service.CustomerService;
 
@@ -13,30 +21,54 @@ public class CustomerServiceImpl implements CustomerService {
 	@Autowired
 	CustomerRepository customerRepository;
 	
+	@Autowired
+	AccountRepository accountRepository;
+	
 	@Override
-	public Customer getCustomer(Long id) {
-		Customer customer = customerRepository.findById(id).get();
-		return customer;
-	}
-
-	@Override
-	public boolean addCustomer(Customer customer) {
-		boolean saved = false;
-		Customer customerEntity = customerRepository.findById(customer.getId()).orElse(null);
-		if (customerEntity == null) {
-			customerRepository.save(customer);
-			saved = true;
+	public CustomerDto getCustomer(Long id) {
+		Customer customer = customerRepository.findById(id).orElse(null);
+		CustomerDto dto = new CustomerDto();
+		if (customer != null) {
+			dto.setId(customer.getId());
+			dto.setName(customer.getName());
+			dto.setAccountId(customer.getAccount().getId());
+			
+			List<Invoice> invList = customer.getInvoiceList();
+			List<InvoiceDto> invOutDto = new ArrayList<InvoiceDto>();
+			
+			for (Invoice inv : invList) {
+				InvoiceDto invDto = new InvoiceDto();
+				invDto.setId(inv.getId());
+				invDto.setDescription(inv.getDescription());
+				invDto.setPurchaseDate(invDto.getPurchaseDate());
+				invDto.setPurchasePrice(invDto.getPurchasePrice());
+				
+				invOutDto.add(invDto);
+			}
+			
+			dto.setInvoiceList(invOutDto);
 		}
-		return saved;
+		return dto;
 	}
 
 	@Override
-	public boolean updateCustomer(Customer customer) {
+	public boolean addCustomer(CustomerDto dto) {
+		Customer customer = new Customer();
+		Account account = accountRepository.findById(dto.getAccountId()).orElse(null);
+		customer.setAccount(account);
+		customer.setName(dto.getName());
+		customerRepository.save(customer);
+		return true;
+	}
+
+	@Override
+	public boolean updateCustomer(CustomerDto dto) {
 		boolean updated = false;
-		Customer customerEntity = customerRepository.findById(customer.getId()).orElse(null);
+		Customer customerEntity = customerRepository.findById(dto.getId()).orElse(null);
 		if (customerEntity != null) {
-			customerEntity.setAccount(customer.getAccount());
-			customerEntity.setName(customer.getName());
+			Account account = accountRepository.findById(dto.getAccountId()).orElse(null);
+			customerEntity.setAccount(account);
+			customerEntity.setName(dto.getName());
 			
 			customerRepository.save(customerEntity);
 			updated = true;

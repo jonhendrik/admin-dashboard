@@ -1,5 +1,6 @@
 package com.jhm.admdash.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -23,10 +24,11 @@ public class Customer {
     Account account;
     
     public Customer() {
-    	
+    	this.invoiceList = new ArrayList<Invoice>();
     }
     
     public Customer(String name) {
+    	this.invoiceList = new ArrayList<Invoice>();
     	this.name = name;
     }
 

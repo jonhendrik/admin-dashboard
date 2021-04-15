@@ -1,12 +1,12 @@
 package com.jhm.admdash.service;
 
-import com.jhm.admdash.model.Customer;
+import com.jhm.admdash.model.dto.CustomerDto;
 
 public interface CustomerService {
 
-	public Customer getCustomer(Long id);
-	public boolean addCustomer(Customer customer);
-	public boolean updateCustomer(Customer customer);
+	public CustomerDto getCustomer(Long id);
+	public boolean addCustomer(CustomerDto dto);
+	public boolean updateCustomer(CustomerDto dto);
 	public boolean deleteCustomer(Long id);
 	
 }

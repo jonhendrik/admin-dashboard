@@ -9,6 +9,7 @@ public class CustomerDto {
 	private Long id;
     private String name;
     private List<InvoiceDto> invoiceList;
+    private Long accountId;
     
     public CustomerDto() {
     	
@@ -36,6 +37,14 @@ public class CustomerDto {
 
 	public void setInvoiceList(List<InvoiceDto> invoiceList) {
 		this.invoiceList = invoiceList;
+	}
+
+	public Long getAccountId() {
+		return accountId;
+	}
+
+	public void setAccountId(Long accountId) {
+		this.accountId = accountId;
 	}
 	
 }

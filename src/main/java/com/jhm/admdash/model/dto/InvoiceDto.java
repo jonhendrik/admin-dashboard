@@ -8,6 +8,7 @@ public class InvoiceDto {
     private String description;
     private Date purchaseDate;
     private double purchasePrice;
+    private Long customerId;
     
     public InvoiceDto() {
     	
@@ -43,6 +44,14 @@ public class InvoiceDto {
 
 	public void setPurchasePrice(double purchasePrice) {
 		this.purchasePrice = purchasePrice;
+	}
+
+	public Long getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Long customerId) {
+		this.customerId = customerId;
 	}
 	
 }
