@@ -4,6 +4,11 @@
 <head>
     <link rel="stylesheet" type="text/css" href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" />
     <script type="text/javascript" src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" type="text/javascript"></script>
+    
+    <c:url value="/js/form.js" var="formsJs" />
+	<script src="${formsJs}"></script>
+	
 </head>
 <body>
 
@@ -21,7 +26,8 @@
         <div class="row" style="margin-top: 40vh">
         	<div class="col-md-4"></div>
         	<div class="col-md-4">
-	        	<form action="/auth" method="post">
+	        	<!--  <form action="dashboard" method="post"> -->
+	        	<form id="loginForm" method="post">
 	        		<div class="row form-group">
 	        			<div class="col-md-12">
 	        				<input type="text" class="form-control" id="username" name="username" placeholder="Username">
