@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,6 +36,17 @@ public class DashboardController {
     	model.put("accountList", accountList);
 		return "customer";
 	}
+    
+    @RequestMapping(value="/updateCustomer/{id}", method = RequestMethod.GET)
+   	public String showUpdateCustomer(ModelMap model, @PathVariable("id") String id){
+       	List<Account> accountList = (List<Account>) accountRepository.findAll();
+       	Customer customer = customerRepository.findById(Long.parseLong(id)).orElse(new Customer());
+       	model.put("account", customer.getAccount());
+       	model.put("customer", customer);
+       	model.put("invoiceList", customer.getInvoiceList());
+       	model.put("accountList", accountList);
+   		return "customer";
+   	}
     
     @RequestMapping(value="/createInvoice", method = RequestMethod.POST)
 	public String showInvoice(ModelMap model,@RequestParam String account){

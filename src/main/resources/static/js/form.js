@@ -38,7 +38,27 @@ $(document).ready(function () {
 			contentType: "application/json"
 	    }).done(function (data) {
 			console.log(data);
-			var successUrl = "dashboard";
+			var successUrl = "/dashboard";
+    		window.location.href = successUrl;
+	    });
+	    event.preventDefault();
+	  });
+
+	$("#customerFormUpd").submit(function (event) {
+	    $.ajax({
+			type: "PUT",
+	      	url: "/api/customers/" + $("#customer").val(),
+	      	data: JSON.stringify({
+				"id": $("#customer").val(),
+			    "name": $("#name").val(),
+			    "invoiceList": [],
+				"accountId": $("#account").val()
+  			}),
+	      	dataType: "json",
+			contentType: "application/json"
+	    }).done(function (data) {
+			console.log(data);
+			var successUrl = "/dashboard";
     		window.location.href = successUrl;
 	    });
 	    event.preventDefault();
@@ -60,7 +80,7 @@ $(document).ready(function () {
 			contentType: "application/json"
 	    }).done(function (data) {
 			console.log(data);
-			var successUrl = "dashboard";
+			var successUrl = "/dashboard";
     		window.location.href = successUrl;
 	    });
 

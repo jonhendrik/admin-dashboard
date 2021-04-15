@@ -31,7 +31,7 @@ $(document).ready(function () {
 		$(".editCustBtn").click(function() {
     		console.log("delete " + this.id);
 
-			var successUrl = "createCustomer";
+			var successUrl = "updateCustomer/" + this.id;
     		window.location.href = successUrl;
 	
 		    event.preventDefault();
