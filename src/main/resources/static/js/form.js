@@ -1,10 +1,5 @@
 $(document).ready(function () {
 	$("#loginForm").submit(function (event) {
-		var formData = {
-			username: $("#name").val(),
-	      	password: $("#email").val()
-	    };
-	
 	    $.ajax({
 			type: "POST",
 	      	url: "/auth",
@@ -17,11 +12,52 @@ $(document).ready(function () {
 	    }).done(function (data) {
 			console.log(data);
 			if (data == true) {
-				var successUrl = "dashboard"; // might be a good idea to return this URL in the successful AJAX call
+				var successUrl = "dashboard";
     			window.location.href = successUrl;
 			} else {
 				
 			}
+	    });
+
+	    event.preventDefault();
+	  });
+});
+
+$(document).ready(function () {
+	$("#customerForm").submit(function (event) {
+	    $.ajax({
+			type: "POST",
+	      	url: "/api/customers",
+	      	data: JSON.stringify({
+			    "name": $("#name").val(),
+			    "invoiceList": [],
+				"accountId": 1
+  			}),
+	      	dataType: "json",
+			contentType: "application/json"
+	    }).done(function (data) {
+			console.log(data);
+	    });
+
+	    event.preventDefault();
+	  });
+});
+
+$(document).ready(function () {
+	$("#invoiceForm").submit(function (event) {
+	    $.ajax({
+			type: "POST",
+	      	url: "/api/invoices",
+	      	data: JSON.stringify({
+			    "description": $("#description").val(),
+			    "purchaseDate": new Date(),
+			    "purchasePrice": $("#price").val(),
+			    "customerId": 98
+			}),
+	      	dataType: "json",
+			contentType: "application/json"
+	    }).done(function (data) {
+			console.log(data);
 	    });
 
 	    event.preventDefault();

@@ -32,13 +32,8 @@ public class LoginController {
 		}
 		
 		model.put("username", username);
-		model.put("password", password);
 		
 		return "dashboard";
 	}
     
-    @RequestMapping(value="/dashboard", method = RequestMethod.GET)
-	public String showDashboard(ModelMap model){
-		return "dashboard";
-	}
 }

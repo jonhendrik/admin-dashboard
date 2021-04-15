@@ -12,9 +12,19 @@
 	
 </head>
 <body>
-	<h1>Dashboard</h1>
-	<div>
-		<div id="accountList"></div>
-	</div>
+	<h1>Admin Dashboard</h1>
+	<% 
+		String account = request.getParameter("username"); 
+		out.print("Welcome "+ account);
+		session.setAttribute("account", account); 
+	%> 
+	<form action="dashboard" method="post">
+		<input type="hidden" name="account" value="${account}">  
+		<div><input class="btn btn-default" type="submit" value="Create Customer" onclick="javascript:document.forms[0].action = 'createCustomer'; return true;"></div>
+		<div><input class="btn btn-default" type="submit" value="Create Invoice" onclick="javascript:document.forms[0].action = 'createInvoice'; return true;"></input></div>
+		<div>
+			<div id="accountList"></div>
+		</div>
+	</form>
 </body>
 </html>
