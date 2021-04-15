@@ -15,7 +15,16 @@
 <form id="invoiceForm" method="post">
 	<input type="hidden" name="account" value="${account}">  
 	<input type="text" class="form-control" id="description" name="description" placeholder="Description">
+	<input type="date" id="purchDate" name="purchDate">
 	<input type="number" step="0.01" class="form-control" id="price" name="price" placeholder="Price">
-	<button type="submit" class="btn btn-primary">Login</button>
+	Select Customer:&nbsp;
+    <select name="customer" id="customer">
+        <c:forEach items="${customerList}" var="customer">
+            <option value="${customer.id}">
+                ${customer.name}
+            </option>
+        </c:forEach>
+    </select>
+	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 </body>

@@ -25,20 +25,22 @@ $(document).ready(function () {
 
 $(document).ready(function () {
 	$("#customerForm").submit(function (event) {
+
 	    $.ajax({
 			type: "POST",
 	      	url: "/api/customers",
 	      	data: JSON.stringify({
 			    "name": $("#name").val(),
 			    "invoiceList": [],
-				"accountId": 1
+				"accountId": $("#account").val()
   			}),
 	      	dataType: "json",
 			contentType: "application/json"
 	    }).done(function (data) {
 			console.log(data);
+			var successUrl = "dashboard";
+    		window.location.href = successUrl;
 	    });
-
 	    event.preventDefault();
 	  });
 });
@@ -50,14 +52,16 @@ $(document).ready(function () {
 	      	url: "/api/invoices",
 	      	data: JSON.stringify({
 			    "description": $("#description").val(),
-			    "purchaseDate": new Date(),
+			    "purchaseDate": $("#purchDate").val(),
 			    "purchasePrice": $("#price").val(),
-			    "customerId": 98
+			    "customerId": $("#customer").val()
 			}),
 	      	dataType: "json",
 			contentType: "application/json"
 	    }).done(function (data) {
 			console.log(data);
+			var successUrl = "dashboard";
+    		window.location.href = successUrl;
 	    });
 
 	    event.preventDefault();

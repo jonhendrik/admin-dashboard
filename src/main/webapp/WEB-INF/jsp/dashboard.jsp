@@ -14,9 +14,16 @@
 <body>
 	<h1>Admin Dashboard</h1>
 	<% 
-		String account = request.getParameter("username"); 
+		String account = null;
+		if (session.getAttribute("account") == null) {
+			account = request.getParameter("username");
+			session.setAttribute("account", account);
+		} else {
+			account = (String) session.getAttribute("account");
+		}
+		
 		out.print("Welcome "+ account);
-		session.setAttribute("account", account); 
+		 
 	%> 
 	<form action="dashboard" method="post">
 		<input type="hidden" name="account" value="${account}">  

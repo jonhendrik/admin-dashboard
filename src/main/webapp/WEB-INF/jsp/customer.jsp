@@ -15,7 +15,15 @@
 <form id="customerForm" method="post">
 	<input type="hidden" name="account" value="${account}">  
 	<input type="text" class="form-control" id="name" name="name" placeholder="Name">
-	<button type="submit" class="btn btn-primary">Login</button>
+	Select Account:&nbsp;
+    <select name="account" id="account">
+        <c:forEach items="${accountList}" var="account">
+            <option value="${account.id}">
+                ${account.name}
+            </option>
+        </c:forEach>
+    </select>
+	<button type="submit" class="btn btn-primary">Save</button>
 </form>
 </body>
 </html>
