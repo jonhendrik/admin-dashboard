@@ -22,7 +22,7 @@ $(document).ready(function () {
 					var customerId = "#customer_" + customer.id;
 					$(customerId).append("<li>"+ invoice.description + "</li>");
 					$(customerId).append("<input type=\"button\" class=\"btn btn-default editInvBtn\" value=\"Edit\" id=\"" + invoice.id + "\"></input>");
-					$(customerId).append("<input type=\"button\" class=\"btn btn-default deletInveBtn\" value=\"Delete\" id=\"" + invoice.id + "\"></input>");
+					$(customerId).append("<input type=\"button\" class=\"btn btn-default deleteInvBtn\" value=\"Delete\" id=\"" + invoice.id + "\"></input>");
 				}
 			}
 		};
@@ -53,7 +53,9 @@ $(document).ready(function () {
 		});
 		
 		$(".editInvBtn").click(function() {
-    		var successUrl = "createInvoice";
+			console.log("edit " + this.id);
+			
+    		var successUrl = "updateInvoice/" + this.id;
 	    	window.location.href = successUrl;
 	
 		    event.preventDefault();

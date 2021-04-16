@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jhm.admdash.model.Account;
 import com.jhm.admdash.model.Customer;
+import com.jhm.admdash.model.Invoice;
 import com.jhm.admdash.repository.AccountRepository;
 import com.jhm.admdash.repository.CustomerRepository;
+import com.jhm.admdash.repository.InvoiceRepository;
 
 @Controller
 public class DashboardController {
@@ -23,6 +25,9 @@ public class DashboardController {
 	
 	@Autowired
 	CustomerRepository customerRepository;
+	
+	@Autowired
+	InvoiceRepository invoiceRepository;
 	
     @RequestMapping(value="/dashboard", method = RequestMethod.GET)
 	public String showDashboard(ModelMap model){
@@ -55,5 +60,15 @@ public class DashboardController {
     	model.put("customerList", customerList);
 		return "invoice";
 	}
+    
+    @RequestMapping(value="/updateInvoice/{id}", method = RequestMethod.GET)
+   	public String showUpdateInvoice(ModelMap model, @PathVariable("id") String id){
+       	Invoice invoice = invoiceRepository.findById(Long.parseLong(id)).orElse(new Invoice());
+       	List<Customer> customerList = (List<Customer>) customerRepository.findAll();
+       	model.put("invoice", invoice);
+       	model.put("customer", invoice.getCustomer());
+       	model.put("customerList", customerList);
+   		return "invoice";
+   	}
    
 }

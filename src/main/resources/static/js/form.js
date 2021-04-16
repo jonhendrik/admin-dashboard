@@ -65,7 +65,29 @@ $(document).ready(function () {
 	  });
 });
 
-$(document).ready(function () {
+	$(document).ready(function () {
+		$("#invoiceFormUpd").submit(function (event) {
+		    $.ajax({
+				type: "PUT",
+		      	url: "/api/invoices/"  + $("#invoice").val(),
+		      	data: JSON.stringify({
+					"id": $("#invoice").val(),
+				    "description": $("#description").val(),
+				    "purchaseDate": $("#purchDate").val(),
+				    "purchasePrice": $("#price").val(),
+				    "customerId": $("#customer").val()
+				}),
+		      	dataType: "json",
+				contentType: "application/json"
+		    }).done(function (data) {
+				console.log(data);
+				var successUrl = "/dashboard";
+	    		window.location.href = successUrl;
+		    });
+	
+		    event.preventDefault();
+	  });
+
 	$("#invoiceForm").submit(function (event) {
 	    $.ajax({
 			type: "POST",
