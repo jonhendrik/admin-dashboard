@@ -11,7 +11,13 @@
 	
 </head>
 <body>
-<h1>Invoice</h1>
+<nav class="navbar navbar-inverse">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Invoice</a>
+		</div>
+	</div>
+</nav>
 <c:choose>
    <c:when test="${ invoice.id == null }">
        <form id="invoiceForm" method="post">

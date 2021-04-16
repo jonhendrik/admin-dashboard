@@ -4,29 +4,36 @@ $(document).ready(function () {
       	url: "/api/accounts",
     }).done(function (data) {
 		console.log(data);
-		$("#accountList").append("<ul>");
+		
+		// start table
+		$("#dashtable").append("<tr><th scope=\"col\">Account Name</th><th scope=\"col\">Account Description</th><th scope=\"col\">Customer List</th><th scope=\"col\">Owned By</th></tr>");
 		for (var account of data) {
-			console.log(account);
-			$("#accountList").append("<li>" + account.name + "</li>");
-			$("#accountList").append("<ul id=\"account_" + account.id + "\">");
+			var html = "<tr><td>"+account.name+"</td><td>"+account.description+"</td><td><table class=\"table table-bordered\" id=\"accountTable_" + account.id + "\"> <tr><th scope=\"col\" style=\"width: 40%\">Customer Name</th><th scope=\"col\" style=\"width: 60%\">Invoice List</th></tr></table>"
+				+"</td><td>"+account.ownedBy+"</td></tr>"
+				
+			$("#dashtable").append(html);
 			for (var customer of account.customerList) {
 				console.log(customer);
-				var accountId = "#account_" + account.id;
-				$(accountId).append("<li>"+ customer.name + "</li>");
-				$(accountId).append("<input type=\"button\" class=\"btn btn-default editCustBtn\" value=\"Edit\" id=\"" + customer.id + "\"></input>");
-				$(accountId).append("<input type=\"button\" class=\"btn btn-default deleteCustBtn\" value=\"Delete\" id=\"" + customer.id + "\"></input>");
-				$(accountId).append("<ul id=\"customer_" + customer.id + "\">");
-				
+				var accountId = "#accountTable_" + account.id;
+				$(accountId).append("<tr><td><p>"+ customer.name + "</p><div class=\"btn-group\" role=\"group\"><button type=\"button\" class=\"btn btn-warning editCustBtn\" id=\"" + customer.id + "\"><span class=\"glyphicon glyphicon-pencil\"></span></button><button type=\"button\" class=\"btn btn-danger deleteCustBtn\" id=\"" + customer.id + "\"><span class=\"glyphicon glyphicon-trash\"></span></button></div></td><td id=\"custTable_" + customer.id + "\"></td></tr>");
+			
 				for (var invoice of customer.invoiceList) {
 					console.log(invoice);
-					var customerId = "#customer_" + customer.id;
-					$(customerId).append("<li>"+ invoice.description + "</li>");
-					$(customerId).append("<input type=\"button\" class=\"btn btn-default editInvBtn\" value=\"Edit\" id=\"" + invoice.id + "\"></input>");
-					$(customerId).append("<input type=\"button\" class=\"btn btn-default deleteInvBtn\" value=\"Delete\" id=\"" + invoice.id + "\"></input>");
+					var customerId = "#custTable_" + customer.id;
+					var dd = new Date(invoice.purchaseDate);
+					var theDate = dd.getMonth()+1 + "/" + dd.getDate() + "/" + dd.getFullYear(); 
+					$(customerId).append("<div class=\"row\"><div class=\"col-md-12\"><div class=\"thumbnail\"><div class=\"caption\"><h4>"+ invoice.description +"</h4><h6>Purchase Date: "+theDate+"</h6><h6>Purchase Price: "+invoice.purchasePrice+"</h6><div class=\"btn-group\" role=\"group\"><button id=\"" + invoice.id + "\" type=\"button\" class=\"btn btn-warning editInvBtn\"><span class=\"glyphicon glyphicon-pencil\"></span></button><button id=\"" + invoice.id + "\" type=\"button\" class=\"btn btn-danger deleteInvBtn\"><span class=\"glyphicon glyphicon-trash\"></span></button></div></div></div></div></div>");
 				}
 			}
-		};
-		$("#accountList").append("</ul></ul></ul>");
+			//$("#dashtable").append("<tr><td>"+account.name+"</td><td>"+account.description+"</td><td><table class=\"table table-bordere\"></table></td><td>"+account.ownedBy+"</td></tr>");
+			//$("#dashtable").append("<td>"+account.name+"</td>");
+			//$("#dashtable").append("<td>"+account.description+"</td>");
+			//$("#dashtable").append("<td></td>");
+			//$("#dashtable").append("<td>"+account.ownedBy+"</td>");
+			//$("#dashtable").append("</tr>");
+		}
+		//end table
+		
 		
 		$(".editCustBtn").click(function() {
     		console.log("delete " + this.id);
