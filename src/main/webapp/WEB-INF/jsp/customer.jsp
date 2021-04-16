@@ -47,8 +47,15 @@
 						</div>
 					</div>
 					<div class="row form-group">
-						<div class="col-md-2 col-md-offset-10">
-							<button type="submit" class="btn btn-primary">Save</button>
+						<div class="col-md-2 col-md-offset-9">
+							<div class="row">
+								<div class="col-md-6">
+									<input type="button" class="btn btn-primary" onclick="javascript:window.location.href='/dashboard'" value="Back"></input>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-primary">Save</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -83,8 +90,15 @@
 						</div>
 					</div>
 					<div class="row form-group">
-						<div class="col-md-2 col-md-offset-10">
-							<button type="submit" class="btn btn-primary">Update</button>
+						<div class="col-md-2 col-md-offset-9">
+							<div class="row">
+								<div class="col-md-6">
+									<input type="button" class="btn btn-primary" onclick="javascript:window.location.href='/dashboard'" value="Back"></input>
+								</div>
+								<div class="col-md-6">
+									<button type="submit" class="btn btn-primary">Update</button>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
